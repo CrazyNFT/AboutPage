@@ -35,11 +35,11 @@ function MyApp({ Component, pageProps }) {
         <img src="/logo" />
       </head>
       {/* <Annoucement /> */}
-      <Navbar />
+      {/* <Navbar /> */}
       <AnimateSharedLayout>
         <Component {...pageProps} />
       </AnimateSharedLayout>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
