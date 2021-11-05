@@ -1,16 +1,43 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import members from "./team.json";
 import MakeTeamMember from "./MakeTeamMember";
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import IconButton from '@material-ui/core/IconButton';
 
+
+import InstagramIcon from '@material-ui/icons/Instagram';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import MenuIcon from '@material-ui/icons/Menu';
+import ClearIcon from '@material-ui/icons/Clear';
+
+import {useStyles} from './Comingsoon/Comingsoon'
 function AboutUs() {
   // let k = [];
   // for(let i in members) {
   //   k.push(MakeTeamMember(members[i]));
   //   }
   // console.log(k)
+  const styles = useStyles()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [blurVal, setblurVal] = useState(10)
+  useEffect(()=>{
+    console.log("use")
+    var temp = setTimeout(
+      (e)=>{
+        if(blurVal!=0){
+          setblurVal(blurVal-10)
+          console.log('called',blurVal)
+        }
+      },1000
+    )
+  },[])
+
   const listofteam = members.map((member) => MakeTeamMember(member));
   return (
-    <section className="text-gray-600 body-font">
+    <section style={{backgroundColor:'#01BEB4'}} className="text-gray-600 body-font">
+      <div style={{ backgroundColor:'#000000cc', width:'100%', height:'100%',position:'relative',color:'white',filter:"blur("+(blurVal)+"px)"}}>
+    
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
           <h1 className="aboutusheading font-medium title-font text-gray-900">
@@ -59,6 +86,7 @@ function AboutUs() {
             </div>
           </div> 
         </div>*/}
+      </div>
       </div>
     </section>
   );
