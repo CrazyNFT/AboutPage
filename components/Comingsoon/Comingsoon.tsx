@@ -13,6 +13,9 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Typography from '@material-ui/core/Typography';
 import ComingSoonNavItems from '/components/ComingSoon/ComingSoonNavItems'
 import Slide from '@material-ui/core/Slide';
+import TextField from '@material-ui/core/TextField';
+
+import ReactPlayer from 'react-player'
 
 
 
@@ -38,6 +41,7 @@ export const useStyles = makeStyles(theme => ({
         width: '100%',
         padding: '20px',
         height: '10%',
+        top:0,
 
         [theme.breakpoints.up("md")]: {
             backgroundColor: '#000000cc',
@@ -66,6 +70,8 @@ export const useStyles = makeStyles(theme => ({
         alignContent: 'center',
         justifyContent: 'center',
         alignItems: 'center',
+        position:'absolute',
+        top:0,
         // borderRadius:'3em',
         [theme.breakpoints.up("md")]: {
             width: '40%',
@@ -126,8 +132,8 @@ export const useStyles = makeStyles(theme => ({
         animationDuration:'3s',
         animationTimingFunction:'cubic-bezier',
         animationIterationCount:'1',
-        top:0.1,
-        marginLeft:'50.0%',
+        top:0,
+        marginLeft:'49.999%',
 
         borderColor: '#000000cc transparent transparent transparent',
         [theme.breakpoints.down("md")]: {
@@ -146,19 +152,74 @@ export const useStyles = makeStyles(theme => ({
             borderWidth:'100vh 400px 0 0',
             opacity:1,
         }
-    }
+    },
+    playerWrapper : {      
+        position: 'relative',
+        filter:'blur(2px)',
+        objectFit: 'cover',
+        height:'100vh',
+
+        // paddingTop: '56.25%' /* Player ratio: 100 / (1280 / 720) */
+    },
+    reactPlayer :{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        objectFit: 'cover',
+
+        // zoom:2,
+        height:'100vh',
+        width:'100%',
+      },
+      form:{
+          color:'white',
+      }
 
 
 })
 );
+const videoSrcs = [
+    './sample1.mp4','./sample2.mp4'
+]
 
 
 export default function ComingSoon() {
     const styles = useStyles()
     const [menuOpen, setMenuOpen] = useState(false)
+    const [currentVideoSrc, setCurrentVideoSrc] = useState(1)
+
+    const ChangeVideoSrc = ()=> {
+        if(currentVideoSrc<videoSrcs.length-1){
+            console.log('Change Video',videoSrcs)
+            setCurrentVideoSrc(currentVideoSrc+1)
+            
+        }else{
+            setCurrentVideoSrc(0)
+        }
+    }
 
     return (
         <div className={styles.root}>
+            <div className={styles.playerWrapper}>
+                {/* <ReactPlayer
+                playing={true}
+                volume={0}
+                loop={true}
+                className={styles.reactPlayer}
+                url='./sample1.mp4'
+                width='100%'
+                height='100vh'
+                /> */}.
+                <video 
+                // onEnded={()=>ChangeVideoSrc()} TODO 
+                className={styles.reactPlayer} autoPlay={true} muted loop>
+                    <source src={videoSrcs[currentVideoSrc]} type="video/webm" />
+                {/* <source src="sample2.mp4" type="video/mp4" /> */}
+
+                {/* <source src="my-video.mp4" type="video/mp4" /> */}
+                </video>
+            </div>
+
             <div className={styles.sidebar}>
                 <img className={styles.logo} src="crzyLogo.png"></img>
                 <ButtonGroup
@@ -202,6 +263,20 @@ export default function ComingSoon() {
                             <Typography variant="h6" component="h6" style={{ color: '#ffffff73', paddingTop: '1em', fontWeight: '100' }} gutterBottom>
                                 We are working on creating a free, fair, easy and a less intimidating NFT Marketplace, so that the layman may open thyself up to new ventures
                             </Typography>
+                            <form className={styles.form} noValidate autoComplete="off">
+
+                                <TextField 
+                                style={{borderBottom:'solid grey'}}
+                                color="primary"
+                                fullWidth={true}
+                                id="filled-full-width"
+                                label="Email Address" 
+                                variant="standard" />
+                                <br></br><br></br>
+                                <Button color="secondary">
+  Submit
+</Button>
+                            </form>
                         </>
                         )
                 }

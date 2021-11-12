@@ -12,18 +12,18 @@ const menus = [
         name:'CrazyHOME',
         link:'/',
     },
-    {
-        name:'CrazyTeam',
-        link:'/about',
-    },
-    {
-        name:'CrazyBlog',
-        link:'https://medium.com/@crazynft',
-    },
-    {
-        name:'Launch App',
-        link:'https://prototype.crazynft.tech/',
-    },
+    // {
+    //     name:'CrazyTeam',
+    //     link:'/about',
+    // },
+    // {
+    //     name:'CrazyBlog',
+    //     link:'https://medium.com/@crazynft',
+    // },
+    // {
+    //     name:'Launch App',
+    //     link:'https://prototype.crazynft.tech/',
+    // },
 ]
 const useStyles = makeStyles(theme => ({
     root:{
